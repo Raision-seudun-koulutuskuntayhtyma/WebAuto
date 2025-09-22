@@ -12,6 +12,7 @@ const {engine} = require('express-handlebars');
 // Local libraries and modules
 // ---------------------------
 
+const pgtools =  require('./postgres-tools')
 // INITIALIZATION
 // --------------
 
@@ -38,6 +39,9 @@ app.use(express.urlencoded({extended: true}))
 // A test route to test.handlebars page
 app.get('/test', (req, res) => {
     testData = {'testKey': 'Hippopotamus is virtahepo in finnish'};
+    pgtools.selectQuery('SELECT * FROM public.vapaana').then((resultset) => {
+        console.log(resultset.rows)
+    })
     res.render('test', testData)
 });
 
