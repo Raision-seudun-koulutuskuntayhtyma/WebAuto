@@ -50,13 +50,25 @@ app.get('/', (req, res) => {
     res.send('This text will be replace by a handlebars homepage. Navigate to /test to see dynamic data in action')
 });
 
-// Route to vehicle listing page
+// TODO: Route to vehicle listing page: free vehicles and vehicles in use
+app.get('/vehicles', (req, res) => {
+    let freeVehicleData = [];
+    pgtools.getFreeVehicles().then((resultset) => {
+        freeVehicleData = resultset.rows;
+        console.log(freeVehicleData);
+    });
+    let inUseVehicleData = [];
+    pgtools.getVehiclesInUse().then((resultset) => {
+        inUseVehicleData = resultset.rows;
+        console.log(inUseVehicleData);
+    });
+    res.send('Autojen tiedot tulevat tälle sivulle')
+});
+// TODO: Route to individual vehicle page: select vehicle by register number
 
-// Route to individual vehicle page
+// TODO: Route to vehicle's diary page: all entries for individual vehicle by register number
 
-// Route to vehicle's diary page
-
-// Route to vehicle's tracking page
+// TODO: Route to vehicle's tracking page: location by register number
 
 // SERVER START
 // ------------
