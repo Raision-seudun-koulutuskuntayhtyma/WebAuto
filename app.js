@@ -50,22 +50,31 @@ app.get('/', (req, res) => {
     res.send('This text will be replace by a handlebars homepage. Navigate to /test to see dynamic data in action')
 });
 
-// TODO: Route to vehicle listing page: free vehicles and vehicles in use
+// Route to vehicle listing page: free vehicles and vehicles in use
 app.get('/vehicles', (req, res) => {
-    let freeVehicleData = [];
-    pgtools.getFreeVehicles().then((resultset) => {
-        freeVehicleData = resultset.rows;
-        console.log(freeVehicleData);
-    });
-    let inUseVehicleData = [];
-    pgtools.getVehiclesInUse().then((resultset) => {
-        inUseVehicleData = resultset.rows;
-        console.log(inUseVehicleData);
-    });
-    res.send('Autojen tiedot tulevat tälle sivulle')
+    pgtools.getVehicleData().then((resultset) => {
+        // Lets give a key for the resultset and render it to the page
+        res.render('vehicles', {vehicleList: resultset.rows});
+    })
+    
 });
-// TODO: Route to individual vehicle page: select vehicle by register number
+// Route to individual vehicle page: select vehicle by register number
+app.get('/vehicleDetail', (req, res) => {
+    pgtools.getVehicleDetails2(['FNK-129']).then((resultset) => {
+        // Lets give a key for the resultset and render it to the page
+        res.render('vehicleDetail', resultset.rows[0]);
+    })
+    
+});
 
+// TODO: Route to diary containing all vehicles
+app.get('/diary', (req, res) => {
+    pgtools.getDiary().then((resultset) => {
+        // Lets give a key for the resultset and render it to the page
+        res.render('diary', {diaryData: resultset.rows});
+    })
+    
+});
 // TODO: Route to vehicle's diary page: all entries for individual vehicle by register number
 
 // TODO: Route to vehicle's tracking page: location by register number
