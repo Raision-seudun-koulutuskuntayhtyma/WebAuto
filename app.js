@@ -24,6 +24,7 @@ const PORT = process.env.PORT || 8080
 
 // Set a folder for static files like css or images
 app.use(express.static('public'));
+app.use('/images', express.static('public/images'));
 
 // Setup templating
 app.engine('handlebars', engine());
@@ -67,7 +68,7 @@ app.get('/vehicleDetail', (req, res) => {
     
 });
 
-// TODO: Route to diary containing all vehicles
+// Route to diary containing all vehicles
 app.get('/diary', (req, res) => {
     pgtools.getDiary().then((resultset) => {
         // Lets give a key for the resultset and render it to the page
@@ -75,6 +76,14 @@ app.get('/diary', (req, res) => {
     })
     
 });
+
+// TODO: Route to vehicle listing using cards
+app.get('/vehiclelist', (req, res) => {
+    pgtools.getVehicleData().then((resultset) => {
+        // Lets give a key for the resultset and render it to the page
+        res.render('vehiclelist', {vehicleList: resultset.rows});
+    })
+})
 // TODO: Route to vehicle's diary page: all entries for individual vehicle by register number
 
 // TODO: Route to vehicle's tracking page: location by register number
