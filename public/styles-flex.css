@@ -1,4 +1,4 @@
-/* Set size to follow parent's size*/
+/* Set size to follow parent's size */
 * {
     box-sizing: border-box;
 }
@@ -94,7 +94,7 @@ a:hover {
 /* Individual card styling */
 .card {
     /* Set card width to 25% for 4 columns */
-    flex: 25%;
+    flex: none;
     margin: 1%;
     background: #ffffff;
     border: 1px solid #ddd;
@@ -139,7 +139,7 @@ a:hover {
 }
 .vehicle-image {
     /* Set image size relative to viewport width (4 columns)*/
-    width: 23vw;
+    width: 25vw;
     height: auto;
     border-radius: 5px;
     margin-bottom: 15px;
@@ -164,8 +164,8 @@ a:hover {
     color: #333;
 }
 /* Responsive adjustments for small screens*/
-@media (min-width: 600px) {
-    .card-group {
+@media (max-width: 600px) {
+    .card {
         flex: 100%;
     } 
 }
