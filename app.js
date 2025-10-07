@@ -84,6 +84,12 @@ app.get('/vehiclelist', (req, res) => {
         res.render('vehiclelist', {vehicleList: resultset.rows});
     })
 })
+
+app.get('/vlistFlex', (req, res) => {
+            
+        res.render('vlistFlex');
+    })
+
 // TODO: Route to vehicle's diary page: all entries for individual vehicle by register number
 
 // TODO: Route to vehicle's tracking page: location by register number
