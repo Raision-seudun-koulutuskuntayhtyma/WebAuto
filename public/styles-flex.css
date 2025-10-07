@@ -93,7 +93,7 @@ a:hover {
 
 /* Individual card styling */
 .card {
-    /* Set card width to 25% for 4 columns */
+    /* Prevent cards to occupy empty space in the page*/
     flex: none;
     margin: 1%;
     background: #ffffff;
@@ -101,8 +101,6 @@ a:hover {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     padding: 10px;
-    
-    
 }
 .card-ajossa {
     float: left;
