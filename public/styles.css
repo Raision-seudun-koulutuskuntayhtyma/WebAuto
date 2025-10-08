@@ -85,6 +85,32 @@ a:hover {
     background-color: #d78089;
     color: #fff;    
 }
+
+/* Styling for dynamic buttons */
+.vapaana-btn {
+    display: block;
+    margin: 0 auto;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none !important;
+    font-size: 24px;
+}
+.ajossa-btn {
+    display: block;
+    margin: 0 auto;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none !important;
+    font-size: 24px;
+}
 /* Card layout for vehicle list */
 .card-group {
     float: left;
@@ -114,7 +140,7 @@ a:hover {
     /* Set card width to 25% for 4 columns */
     width: 25%;
     margin: 1%;
-    background-image: linear-gradient(to bottom , #fd3636, #f2bcbc);
+    background-image: linear-gradient(to bottom , #f46666, #ffffff);
     /*background: #f2bcbc;*/
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -131,7 +157,7 @@ a:hover {
     /* Set card width to 25% for 4 columns */
     width: 25%;
     margin: 1%;
-    background-image: linear-gradient(to bottom , #36fd57, #bcf2c3);
+    background-image: linear-gradient(to bottom , #65f87e, #ffffff);
     /*background: #baf4bd;*/
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -147,7 +173,7 @@ a:hover {
     width: 23vw;
     height: auto;
     border-radius: 5px;
-    margin-bottom: 15px;
+    /* margin-bottom: 15px;*/
     /* Adjust width for smaller screens */
     @media (max-width: 600px) {
         width: 80vw;
