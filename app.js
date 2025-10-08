@@ -61,7 +61,8 @@ app.get('/vehicles', (req, res) => {
 });
 // Route to individual vehicle page: select vehicle by register number
 app.get('/vehicleDetail', (req, res) => {
-    pgtools.getVehicleDetails2(['FNK-129']).then((resultset) => {
+    let register = req.query.register;
+    pgtools.getVehicleDetails2([register]).then((resultset) => {
         // Lets give a key for the resultset and render it to the page
         res.render('vehicleDetail', resultset.rows[0]);
     })
@@ -88,7 +89,13 @@ app.get('/vehiclelist', (req, res) => {
 app.get('/vlistFlex', (req, res) => {
             
         res.render('vlistFlex');
+
     })
+
+app.get('/vlistColumns', (reg, res) => {
+    res.render('vlistColumns');
+})
+
 
 // TODO: Route to vehicle's diary page: all entries for individual vehicle by register number
 
