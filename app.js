@@ -91,7 +91,9 @@ app.get('/vlistFlex', (req, res) => {
         res.render('vlistFlex');
 
     })
-
+app.get('/icontest', (req, res) => {
+    res.render('icontest');
+})
 app.get('/vlistColumns', (reg, res) => {
     res.render('vlistColumns');
 })
