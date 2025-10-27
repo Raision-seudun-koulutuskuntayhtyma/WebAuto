@@ -22,9 +22,10 @@ const app = express();
 // Define a TCP port to listen: read env or use 8080 in undefined
 const PORT = process.env.PORT || 8080
 
-// Set a folder for static files like css or images
+// Set a folders for static files like css, images or icons
 app.use(express.static('public'));
 app.use('/images', express.static('public/images'));
+app.use('/icons', express.static('public/icons'))
 
 // Setup templating
 app.engine('handlebars', engine());
@@ -94,6 +95,11 @@ app.get('/vlistFlex', (req, res) => {
 app.get('/icontest', (req, res) => {
     res.render('icontest');
 })
+
+app.get('/svgtest', (req, res)=> {
+    res.render('svgtest');
+})
+
 app.get('/vlistColumns', (reg, res) => {
     res.render('vlistColumns');
 })

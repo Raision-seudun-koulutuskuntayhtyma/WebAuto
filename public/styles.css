@@ -2,6 +2,7 @@
 :root {
     --icon-stroke-color: black;
     --icon-fill-color: none;
+    --icon-background-color: none;
 }
 
 /* Set size to follow parent's size*/
@@ -223,7 +224,8 @@ a:hover {
 .icon-enermous-red{
     width: 8em;
     height: 8em;
-    --icon-fill-color: red;
+    --icon-fill-color: rgb(36, 39, 76);
+    --icon-background-color: rgb(225, 194, 127);
 }
 /* Responsive adjustments for small screens*/
 @media (min-width: 600px) {
