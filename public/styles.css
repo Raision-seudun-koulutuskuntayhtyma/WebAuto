@@ -3,6 +3,11 @@
     --icon-stroke-color: black;
     --icon-fill-color: none;
     --icon-background-color: none;
+    --color-raseko-dark-blue: rgb(27, 51, 89);
+    --color-raseko-blue: rgb(0, 150, 179);
+    --color-raseko-light-blue: rgb(75, 188, 197);
+    --color-raseko-pink: rgb(232, 32, 112);
+    --color-raseko-grey: rgb(239, 239, 239);
 }
 
 /* Set size to follow parent's size*/
@@ -220,12 +225,24 @@ a:hover {
     width: 6em;
     height: 6em;
 }
-/* Make a SVG icon very big and chane fill to red */
+/* Make a SVG icon very big and chane fill to red and remove stroke*/
 .icon-enermous-red{
     width: 8em;
     height: 8em;
-    --icon-fill-color: rgb(36, 39, 76);
+    --icon-stroke-color:none;
+    --icon-fill-color: rgb(171, 10, 10);
     --icon-background-color: rgb(225, 194, 127);
+}
+
+.icon-enermous{
+    width: 8em;
+    height: 8em;
+}
+
+.icon-raseko-colors{
+    --icon-stroke-color:black;
+    --icon-fill-color: var(--color-raseko-pink);
+    --icon-background-color: var(--color-raseko-light-blue);
 }
 /* Responsive adjustments for small screens*/
 @media (min-width: 600px) {
