@@ -42,7 +42,7 @@ a:hover {
 .container {
     width: 80%;
     margin: auto;
-    overflow: hidden;
+    overflow: auto;
     padding: 20px;
     background: #fff;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -243,6 +243,10 @@ a:hover {
     --icon-stroke-color:black;
     --icon-fill-color: var(--color-raseko-pink);
     --icon-background-color: var(--color-raseko-light-blue);
+}
+
+.icon-percentage-size{
+    width: 20%;
 }
 /* Responsive adjustments for small screens*/
 @media (min-width: 600px) {
