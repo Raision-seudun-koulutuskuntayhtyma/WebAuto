@@ -1,5 +1,6 @@
 /* Set a global variables to change colors in icons */
 :root {
+    --icon-stroke-width: 1px;
     --icon-stroke-color: black;
     --icon-fill-color: none;
     --icon-background-color: none;
@@ -44,7 +45,8 @@ a:hover {
     margin: auto;
     overflow: auto;
     padding: 20px;
-    background: #fff;
+    /* background: var(--color-raseko-light-blue); */
+    background: #ffffff;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
@@ -242,9 +244,14 @@ a:hover {
 .icon-raseko-colors{
     --icon-stroke-color:black;
     --icon-fill-color: var(--color-raseko-pink);
-    --icon-background-color: var(--color-raseko-light-blue);
+    --icon-background-color: var(--color-raseko-grey);
 }
 
+.icon-raseko-colors-dark{
+    --icon-stroke-color:var(--color-raseko-grey);
+    --icon-fill-color: var(--color-raseko-dark-blue);
+    --icon-background-color: none;
+}
 .icon-percentage-size{
     width: 20%;
 }

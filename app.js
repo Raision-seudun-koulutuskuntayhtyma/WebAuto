@@ -104,6 +104,9 @@ app.get('/vlistColumns', (reg, res) => {
     res.render('vlistColumns');
 })
 
+app.get('/iconList', (req, res)=> {
+    res.render('iconList');
+})
 
 // TODO: Route to vehicle's diary page: all entries for individual vehicle by register number
 
