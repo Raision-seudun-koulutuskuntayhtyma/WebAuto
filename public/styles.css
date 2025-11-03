@@ -255,6 +255,14 @@ a:hover {
 .icon-percentage-size{
     width: 20%;
 }
+
+.info-box {
+    align-items: center;
+    background-color: #e7f3fe;
+    border-left: 6px solid #2196F3;
+    margin: 20px 0;
+    padding: 10px 20px;
+}
 /* Responsive adjustments for small screens*/
 @media (min-width: 600px) {
     .card-group {
