@@ -31,15 +31,8 @@ p {
     color: #262626;
     line-height: 1.6;
 }
-/* Link styling */
-a {
-    color: #007BFF;
-    text-decoration: none;
-}
 
-a:hover {
-    text-decoration: underline;
-}
+
 /* Common settings for Containers*/
 .container {
     width: 80%;
@@ -61,83 +54,23 @@ a:hover {
     height: 100%;
 }
 
-/* Styling for ordinary buttons */
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    color: #fff;
-    background-color: #28a745;
-    border: none;
-    border-radius: 5px;
-}
 
-.button:hover {
-    background-color: #218838;
-}
-
-/* Styling for buttons indicating status vapaana (available)*/
-.vapaana {
-   display: block;
-   margin: 0 auto;
-   background-color: #218838;
-   color: #fff;
-   border: none;
-   border-radius: 5px;
-   padding: 10px 50px;    
-}
-
-.vapaana_bg {
-    background-color: #218838;
-    color: #fff;    
-}
-
-/* Styling for buttons indicating status ajossa (occupied)*/
-.ajossa {
-    display: block;
-    margin: 0 auto;
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 50px;
-}
-.ajossa-bg {
-    background-color: #d78089;
-    color: #fff;    
-}
 /* Card layout for vehicle list */
 .card-group {
     display: flex;
     flex-wrap: wrap;
 }
 
-/* Individual card styling */
-.card {
-    /* Prevent cards to occupy empty space in the page*/
-    flex: none;
-    margin: 1%;
-    background: #ffffff;
-    border: 1px solid #751a23;
-    border-radius: 60px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    padding: 10px;
-}
 .card-ajossa {
     float: left;
     /* Set card width to 25% for 4 columns */
     width: 25%;
     margin: 1%;
-    /*background-image: linear-gradient(to bottom , #fd3636, #f2bcbc);*/
-    /*background: #f2bcbc;*/
     border: 2px solid var(--color-raseko-pink);
     border-radius: 20px;
     box-shadow: 0 5px 8px var(--shadow-raseko-pink);
     padding: 10px;
+
     /* Adjust width for smaller screens */
     @media (max-width: 600px) {
         width: 100%;
@@ -146,15 +79,15 @@ a:hover {
 
 .card-vapaana {
     float: left;
+
     /* Set card width to 25% for 4 columns */
     width: 25%;
     margin: 1%;
-    /* background-image: linear-gradient(to bottom , #36fd57, #bcf2c3); */
-    /*background: #baf4bd;*/
     border: 2px solid var(--color-raseko-dark-blue);
     border-radius: 20px;
     box-shadow: 0 5px 8px var(--shadow-raseko-dark-blue);
     padding: 10px;
+
     /* Adjust width for smaller screens */
     @media (max-width: 600px) {
         width: 100%;
@@ -166,13 +99,20 @@ a:hover {
     height: auto;
     border-radius: 5px;
     margin-bottom: 15px;
+
     /* Adjust width for smaller screens */
     @media (max-width: 600px) {
         width: 80vw;
     }
 }
-.card-body {
+
+.vehicle-detail-image {
+    /* Set image size relative to viewport width (4 columns)*/
+    width: 80vw;
+    height: auto;
+    border-radius: 5px;
     margin-bottom: 15px;
+   
 }
 
 .card-text {
@@ -233,14 +173,6 @@ a:hover {
     width: 6em;
     height: 6em;
 }
-/* Make a SVG icon very big and chane fill to red and remove stroke*/
-.icon-enermous-red{
-    width: 8em;
-    height: 8em;
-    --icon-stroke-color:none;
-    --icon-fill-color: rgb(171, 10, 10);
-    --icon-background-color: rgb(225, 194, 127);
-}
 
 .icon-enermous{
     width: 8em;
@@ -256,7 +188,7 @@ a:hover {
 .icon-raseko-colors-dark{
     --icon-stroke-color:var(--color-raseko-grey);
     --icon-fill-color: var(--color-raseko-dark-blue);
-    --icon-background-color: none;
+    --icon-background-color: var(--color-raseko-grey);
 }
 .icon-percentage-size{
     width: 20%;
@@ -274,6 +206,14 @@ a:hover {
     background-color: var(--color-info-box-bg);
     margin: 20px 0;
     padding: 10px 20px;
+}
+
+.drive-information {
+    border-spacing: 30px;
+}
+
+.big-text {
+    font-size: 3em;
 }
 /* Responsive adjustments for small screens*/
 @media (max-width: 600px) {
