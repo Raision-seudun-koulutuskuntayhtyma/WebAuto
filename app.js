@@ -55,13 +55,10 @@ app.get('/vehiclelist', (req, res) => {
 // Route to individual vehicle page: select vehicle by register number
 app.get('/vehicleDetails', (req, res) => {
     let register = req.query.register;
-    pgtools.getVehicleDetails([register]).then((resultset) => {
-        console.log(resultset.rows[0]);
-        console.log(resultset.rows[0].otto);
-        
+    pgtools.getVehicleDetails([register]).then((resultset) => { 
+
         // Convert time stamp to user friendly string
         let userFriendlyTimestamp = pgtools.convertToDateTimeObject(resultset.rows[0].otto);
-        console.log(userFriendlyTimestamp);
         let dateTimeValue = userFriendlyTimestamp.date + ' kello ' + userFriendlyTimestamp.time
         
         // Change original timestamp to string value
@@ -78,7 +75,35 @@ app.get('/vehicleDetails', (req, res) => {
 app.get('/diary', (req, res) => {
     pgtools.getDiary().then((resultset) => {
         // Lets give a key for the resultset and render it to the page
-        res.render('diary', {diaryData: resultset.rows});
+        //console.log(resultset.rows[1])
+        let rows = resultset.rows
+        console.log(rows[0])
+        let row = 0
+        let formattedTake = {}
+        let formattedReturn = {}
+        for (row in rows) {
+            if (rows[row].otto == null) {
+                formattedTake.date = '-'
+                formattedTake.time = '-'
+            }
+            else {
+            formattedTake = pgtools.convertToDateTimeObject(rows[row].otto);
+            }
+
+             if (rows[row].palautus == null) {
+                formattedReturn.date = '-'
+                formattedReturn.time = '-'
+            }
+            else {
+            formattedReturn = pgtools.convertToDateTimeObject(rows[row].palautus);
+            }
+            
+            rows[row].otto = formattedTake.date + ' kello ' + formattedTake.time;
+            rows[row].palautus = formattedReturn.date + ' kello ' + formattedReturn.time;
+            console.log(rows[row].otto)
+            console.log(rows[row].palautus)
+        }
+        res.render('diary', {diaryData: rows});
     })
     
 });
