@@ -199,7 +199,8 @@ a:hover {
 
 .card-text {
     font-size: 14px;
-    color: #555;
+    background-color: var(--color-raseko-grey);
+    color: #151515;
 }
 
 .card-title {

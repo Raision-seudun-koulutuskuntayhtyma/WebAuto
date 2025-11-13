@@ -8,6 +8,7 @@
     --color-raseko-light-blue: rgb(75, 188, 197);
     --color-raseko-pink: rgb(232, 32, 112);
     --color-raseko-grey: rgb(239, 239, 239);
+    --color-info-box-bg: #cfd1d5;
     --shadow-raseko-dark-blue: rgba(27, 51, 89, 0.3);
     --shadow-raseko-pink: rgb(232, 32, 112, 0.3);
 }
@@ -47,6 +48,17 @@ a:hover {
     padding: 20px;
     background: #fff;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.align-center {
+    text-align: center;
+}
+
+.alignment-box {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 /* Styling for ordinary buttons */
@@ -164,8 +176,10 @@ a:hover {
 }
 
 .card-text {
+    padding: 10px;
     font-size: 14px;
-    color: #555;
+    background-color: #cfd1d5;
+    color: #151515;
 }
 
 .card-title {
@@ -179,7 +193,7 @@ a:hover {
 .vapaana-btn {
     display: block;
     margin: 0 auto;
-    background-color: #28a745;
+    background-color: var(--color-raseko-dark-blue);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -199,6 +213,67 @@ a:hover {
     text-align: center;
     text-decoration: none !important;
     font-size: 24px;
+}
+
+.icon-normal {
+    width: 1em;
+    height: 1em;
+}
+.icon-big{
+    width: 3em;
+    height: 3em;
+}
+
+.icon-medium{
+    width: 2em;
+    height: 2em;
+}
+
+.icon-huge{
+    width: 6em;
+    height: 6em;
+}
+/* Make a SVG icon very big and chane fill to red and remove stroke*/
+.icon-enermous-red{
+    width: 8em;
+    height: 8em;
+    --icon-stroke-color:none;
+    --icon-fill-color: rgb(171, 10, 10);
+    --icon-background-color: rgb(225, 194, 127);
+}
+
+.icon-enermous{
+    width: 8em;
+    height: 8em;
+}
+
+.icon-raseko-colors{
+    --icon-stroke-color:black;
+    --icon-fill-color: var(--color-raseko-pink);
+    --icon-background-color: var(--color-raseko-grey);
+}
+
+.icon-raseko-colors-dark{
+    --icon-stroke-color:var(--color-raseko-grey);
+    --icon-fill-color: var(--color-raseko-dark-blue);
+    --icon-background-color: none;
+}
+.icon-percentage-size{
+    width: 20%;
+}
+
+.info-box {
+    width: 100;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: stretch;
+    justify-content: space-around;
+    column-gap: 30px;
+    background-color: var(--color-info-box-bg);
+    margin: 20px 0;
+    padding: 10px 20px;
 }
 /* Responsive adjustments for small screens*/
 @media (max-width: 600px) {
