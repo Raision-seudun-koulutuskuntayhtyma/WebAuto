@@ -38,14 +38,6 @@ app.use(express.urlencoded({extended: true}))
 // URL ROUTES
 // ----------
 
-// A test route to test.handlebars page
-app.get('/test', (req, res) => {
-    testData = {'testKey': 'Hippopotamus is virtahepo in finnish'};
-    pgtools.selectQuery('SELECT * FROM public.vapaana').then((resultset) => {
-        console.log(resultset.rows)
-    })
-    res.render('test', testData)
-});
 
 // Route to home page
 app.get('/', (req, res) => {
@@ -53,19 +45,31 @@ app.get('/', (req, res) => {
 });
 
 // Route to vehicle listing page: free vehicles and vehicles in use
-app.get('/vehicles', (req, res) => {
+app.get('/vehiclelist', (req, res) => {
     pgtools.getVehicleData().then((resultset) => {
         // Lets give a key for the resultset and render it to the page
-        res.render('vehicles', {vehicleList: resultset.rows});
+        res.render('vehiclelist', {vehicleList: resultset.rows});
     })
-    
-});
+})
+
 // Route to individual vehicle page: select vehicle by register number
-app.get('/vehicleDetail', (req, res) => {
+app.get('/vehicleDetails', (req, res) => {
     let register = req.query.register;
-    pgtools.getVehicleDetails2([register]).then((resultset) => {
-        // Lets give a key for the resultset and render it to the page
-        res.render('vehicleDetail', resultset.rows[0]);
+    pgtools.getVehicleDetails([register]).then((resultset) => {
+        console.log(resultset.rows[0]);
+        console.log(resultset.rows[0].otto);
+        
+        // Convert time stamp to user friendly string
+        let userFriendlyTimestamp = pgtools.convertToDateTimeObject(resultset.rows[0].otto);
+        console.log(userFriendlyTimestamp);
+        let dateTimeValue = userFriendlyTimestamp.date + ' kello ' + userFriendlyTimestamp.time
+        
+        // Change original timestamp to string value
+        resultset.rows[0].otto = dateTimeValue;
+
+        // Render it to the page
+        res.render('vehicleDetails', resultset.rows[0]);
+        
     })
     
 });
@@ -79,34 +83,6 @@ app.get('/diary', (req, res) => {
     
 });
 
-// TODO: Route to vehicle listing using cards
-app.get('/vehiclelist', (req, res) => {
-    pgtools.getVehicleData().then((resultset) => {
-        // Lets give a key for the resultset and render it to the page
-        res.render('vehiclelist', {vehicleList: resultset.rows});
-    })
-})
-
-app.get('/vlistFlex', (req, res) => {
-            
-        res.render('vlistFlex');
-
-    })
-app.get('/icontest', (req, res) => {
-    res.render('icontest');
-})
-
-app.get('/svgtest', (req, res)=> {
-    res.render('svgtest');
-})
-
-app.get('/vlistColumns', (reg, res) => {
-    res.render('vlistColumns');
-})
-
-app.get('/iconList', (req, res)=> {
-    res.render('iconList');
-})
 
 // TODO: Route to vehicle's diary page: all entries for individual vehicle by register number
 
