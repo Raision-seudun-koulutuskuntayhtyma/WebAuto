@@ -41,9 +41,13 @@ app.use(express.urlencoded({extended: true}))
 
 // Route to home page
 app.get('/', (req, res) => {
-    res.send('This text will be replace by a handlebars homepage. Navigate to /test to see dynamic data in action')
+    res.render('index')
 });
 
+app.get('/welcome', (req, res) => {
+    let user = req.query.user
+    res.render('welcome', {user: user})
+})
 // Route to vehicle listing page: free vehicles and vehicles in use
 app.get('/vehiclelist', (req, res) => {
     pgtools.getVehicleData().then((resultset) => {
@@ -75,24 +79,22 @@ app.get('/vehicleDetails', (req, res) => {
 app.get('/diary', (req, res) => {
     pgtools.getDiary().then((resultset) => {
         // Lets give a key for the resultset and render it to the page
-        //console.log(resultset.rows[1])
-        let rows = resultset.rows
-        console.log(rows[0])
-        let row = 0
-        let formattedTake = {}
-        let formattedReturn = {}
+        let rows = resultset.rows;
+        let row = 0;
+        let formattedTake = {};
+        let formattedReturn = {};
         for (row in rows) {
             if (rows[row].otto == null) {
-                formattedTake.date = '-'
-                formattedTake.time = '-'
+                formattedTake.date = '-';
+                formattedTake.time = '-';
             }
             else {
             formattedTake = pgtools.convertToDateTimeObject(rows[row].otto);
             }
 
              if (rows[row].palautus == null) {
-                formattedReturn.date = '-'
-                formattedReturn.time = '-'
+                formattedReturn.date = '-';
+                formattedReturn.time = '-';
             }
             else {
             formattedReturn = pgtools.convertToDateTimeObject(rows[row].palautus);
@@ -100,15 +102,22 @@ app.get('/diary', (req, res) => {
             
             rows[row].otto = formattedTake.date + ' kello ' + formattedTake.time;
             rows[row].palautus = formattedReturn.date + ' kello ' + formattedReturn.time;
-            console.log(rows[row].otto)
-            console.log(rows[row].palautus)
+            console.log(rows[row].otto);
+            console.log(rows[row].palautus);
         }
         res.render('diary', {diaryData: rows});
     })
     
 });
 
-
+app.get('/filterDiary', (req, res) => {
+    pgtools.selectQuery('SELECT rekisterinumero FROM auto;').then((resultset) => {
+        console.log(resultset.rows)
+        let options = {registers: resultset.rows}
+        console.log(options)
+        res.render('filterDiary', options);
+    })
+});
 // TODO: Route to vehicle's diary page: all entries for individual vehicle by register number
 
 // TODO: Route to vehicle's tracking page: location by register number
