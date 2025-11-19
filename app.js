@@ -12,7 +12,8 @@ const {engine} = require('express-handlebars');
 // Local libraries and modules
 // ---------------------------
 
-const pgtools =  require('./postgres-tools')
+const pgtools =  require('./postgres-tools');
+const { on } = require('pg-pool');
 // INITIALIZATION
 // --------------
 
@@ -38,6 +39,9 @@ app.use(express.urlencoded({extended: true}))
 // URL ROUTES
 // ----------
 
+app.get('/formTest', (req,res) => {
+    res.render('formTest')
+});
 
 // Route to home page
 app.get('/', (req, res) => {
@@ -111,13 +115,70 @@ app.get('/diary', (req, res) => {
 });
 
 app.get('/filterDiary', (req, res) => {
-    pgtools.selectQuery('SELECT rekisterinumero FROM auto;').then((resultset) => {
-        console.log(resultset.rows)
-        let options = {registers: resultset.rows}
-        console.log(options)
-        res.render('filterDiary', options);
+    let options = {}
+    let registerList = []
+    let driverList = []
+    let reasonList = []
+
+    pgtools.selectQuery('SELECT * FROM webrekisterit;').then((resultset) => {
+        registerList = resultset.rows;
+
+        pgtools.selectQuery('SELECT * FROM webtarkoitukset;').then((resultset) => {
+            reasonList = resultset.rows
+
+            pgtools.selectQuery('SELECT * FROM webkuljettajat;').then((resultset) => {
+                driverList = resultset.rows;
+
+                options = {registers: registerList,
+                    reasons: reasonList,
+                    drivers: driverList
+                };
+                res.render('filterDiary', options)
+
+            })
+        })
     })
+    
 });
+
+app.get('/filteredDiary', (req, res) => {
+    let registerFilter = req.query.rekisterinumero
+    let registerFilterValid = req.query.rekisterisuodatus
+    let reasonFilter = req.query.tarkoitus
+    let reasonFilterValid = req.query.tarkoitussuodatus
+    let driverFilter = req.query.nimi
+    let driverFilterValid = req.query.kuljettajasuodatus
+    let startFilter = req.query.alkaa
+    let endFilter = req.query.loppuu
+    let dateFiltersValid = req.query.ottosuodatus
+    
+    let conditions = ''
+    if (registerFilterValid == 'on') {
+        conditions = conditions + 'rekisterinumro = '+ registerFilter + ' AND ';
+    }
+    if (reasonFilterValid == 'on') {
+        conditions = conditions + 'tarkoitus = '+ reasonFilter + ' AND ';
+    }
+    if (driverFilterValid == 'on') {
+        conditions = conditions + 'nimi = ' + driverFilter + ' AND ';
+    }
+    if (dateFiltersValid == 'on') {
+         conditions = conditions +  'otto BETWEEN ' + startFilter + ' AND ' + endFilter
+    }
+
+    let whereClause = 'WHERE ' + conditions
+    let cleanwhereClause = ''
+    console.log(whereClause.endsWith(' AND '))
+    if (whereClause.endsWith(' AND ')) {
+        let position = whereClause.lastIndexOf(' AND ')
+        cleanwhereClause = whereClause.substring(0, position)
+        console.log(position)
+    }
+    console.log(registerFilter)
+    console.log(registerFilterValid)
+    console.log(cleanwhereClause)
+    
+})
 // TODO: Route to vehicle's diary page: all entries for individual vehicle by register number
 
 // TODO: Route to vehicle's tracking page: location by register number

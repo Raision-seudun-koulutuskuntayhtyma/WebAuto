@@ -37,6 +37,7 @@ p {
 /* Common settings for Containers*/
 .container {
     width: 80%;
+    height: fit-content;
     margin: auto;
     overflow: auto;
     padding: 20px;
@@ -242,17 +243,18 @@ tr:nth-child(even) {
     background-color: var(--color-raseko-grey);
 }
 
-tr:hover {
+.tr-highlighted:hover {
     background-color: var(--color-raseko-highlighter); 
 }
+
 table {
     width: auto;
-    border: 1px solid var(--color-raseko-dark-blue);
     border-collapse: collapse;
 }
 
 .input-field {
-    font-size: x-large;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
     margin-bottom: 20px;
 }
 
@@ -262,6 +264,13 @@ table {
     background-color: var(--color-raseko-dark-blue);
     border-radius: 5px;
     padding: 5px 10px;;
+}
+
+
+
+.big-checkbox {
+ width: 20px;
+ height: 20px;
 }
 /* Responsive adjustments for small screens*/
 @media (max-width: 600px) {
