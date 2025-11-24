@@ -48,9 +48,27 @@ app.get('/', (req, res) => {
     res.render('index')
 });
 
-app.get('/welcome', (req, res) => {
-    let user = req.query.user
-    res.render('welcome', {user: user})
+app.post('/welcome', (req, res) => {
+    console.log('Login information', req.body)
+    let user = req.body.user;
+    let inputPassword = req.body.inputPassword;
+    let userRole = '';
+    let userPassword = '';
+    pgtools.getWebUserData([user]).then((resultset) => {
+        let userData = resultset.rows[0];
+        if (userData) {
+            console.log('Dataa saatiin');
+            res.render('welcome', {user: user, role: userData.user_role})
+        } else {
+            console.log('Ei tullu dataa');
+            res.render('invalidUserName', {user: user})
+        }
+        console.log('Database information', userData);
+        //res.render('welcome', {user: user, role: userData.user_role})
+     
+    
+    
+})
 })
 // Route to vehicle listing page: free vehicles and vehicles in use
 app.get('/vehiclelist', (req, res) => {
@@ -149,21 +167,24 @@ app.get('/filteredDiary', (req, res) => {
     let driverFilter = req.query.nimi
     let driverFilterValid = req.query.kuljettajasuodatus
     let startFilter = req.query.alkaa
+    let startFilterString = startFilter.toString()
+    console.log(startFilterString)
+    console.log(req.query.alkaa)
     let endFilter = req.query.loppuu
     let dateFiltersValid = req.query.ottosuodatus
     
     let conditions = ''
     if (registerFilterValid == 'on') {
-        conditions = conditions + 'rekisterinumro = '+ registerFilter + ' AND ';
+        conditions = conditions + `rekisterinumero = '${registerFilter}' AND `;
     }
     if (reasonFilterValid == 'on') {
-        conditions = conditions + 'tarkoitus = '+ reasonFilter + ' AND ';
+        conditions = conditions + `tarkoitus = '${reasonFilter}' AND `;
     }
     if (driverFilterValid == 'on') {
-        conditions = conditions + 'nimi = ' + driverFilter + ' AND ';
+        conditions = conditions + `nimi = '${driverFilter}' AND `;
     }
     if (dateFiltersValid == 'on') {
-         conditions = conditions +  'otto BETWEEN ' + startFilter + ' AND ' + endFilter
+         conditions = conditions +  `otto BETWEEN '${startFilter}' AND '${endFilter}'`;
     }
 
     let whereClause = 'WHERE ' + conditions
@@ -174,10 +195,10 @@ app.get('/filteredDiary', (req, res) => {
         cleanwhereClause = whereClause.substring(0, position)
         console.log(position)
     }
-    console.log(registerFilter)
-    console.log(registerFilterValid)
-    console.log(cleanwhereClause)
-    
+    else {
+        cleanwhereClause = whereClause
+    }
+   console.log('Where clause is:', cleanwhereClause)
 })
 // TODO: Route to vehicle's diary page: all entries for individual vehicle by register number
 
