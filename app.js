@@ -67,7 +67,6 @@ app.post('/welcome', (req, res) => {
 
     // Get session data
     let sessionData = req.session;
-    console.log(sessionData)
 
     // Define variables for users Role and Stored password
     let userRole = '';
@@ -107,9 +106,10 @@ app.post('/welcome', (req, res) => {
 // Route to vehicle listing page: free vehicles and vehicles in use
 app.get('/vehiclelist', (req, res) => {
     let userRole = req.session.user;
-    console.log(userRole);
     if (userRole) {
         pgtools.getVehicleData().then((resultset) => {
+            let vehicleData = resultset.rows;
+
         // Lets give a key for the resultset and render it to the page
         res.render('vehiclelist', {vehicleList: resultset.rows});
     })
@@ -138,10 +138,46 @@ app.get('/vehicleDetails', (req, res) => {
     
 });
 
+// Route to diary of single vehicle by register number
+app.get('/vehicleDiary', (req, res) => {
+    let register = req.query.register
+    pgtools.getVehicleDiary([register]).then((resultset) =>{
+        console.log(resultset.rows);
+
+        // Cycle rows and conver timestamps to user friendy format
+        let rows = resultset.rows;
+        let row = 0;
+        let formattedTake = {};
+        let formattedReturn = {};
+        for (row in rows) {
+            if (rows[row].otettu == null) {
+                formattedTake.date = '-';
+                formattedTake.time = '-';
+            }
+            else {
+            formattedTake = pgtools.convertToDateTimeObject(rows[row].otettu);
+            }
+
+             if (rows[row].palautettu == null) {
+                formattedReturn.date = '-';
+                formattedReturn.time = '-';
+            }
+            else {
+            formattedReturn = pgtools.convertToDateTimeObject(rows[row].palautettu);
+            }
+            
+            rows[row].otto = formattedTake.date + ' kello ' + formattedTake.time;
+            rows[row].palautettu = formattedReturn.date + ' kello ' + formattedReturn.time;
+        }
+        res.render('vehicleDiary', {diaryData: resultset.rows})
+    })
+})
+
 // Route to diary containing all vehicles
 app.get('/diary', (req, res) => {
     pgtools.getDiary().then((resultset) => {
-        // Lets give a key for the resultset and render it to the page
+        
+        // Cycle rows and conver timestamps to user friendy format
         let rows = resultset.rows;
         let row = 0;
         let formattedTake = {};
@@ -165,9 +201,8 @@ app.get('/diary', (req, res) => {
             
             rows[row].otto = formattedTake.date + ' kello ' + formattedTake.time;
             rows[row].palautus = formattedReturn.date + ' kello ' + formattedReturn.time;
-            console.log(rows[row].otto);
-            console.log(rows[row].palautus);
         }
+        // Lets give a key for the resultset and render it to the page
         res.render('diary', {diaryData: rows});
     })
     
@@ -179,7 +214,7 @@ app.get('/filterDiary', (req, res) => {
     let userRole = 'none'
     
     // Read session data
-    console.log(req.session);
+    
     if (req.session.user) {
         userRole = req.session.user.role
 
@@ -251,8 +286,6 @@ app.get('/filteredDiary', (req, res) => {
     let driverFilterValid = req.query.kuljettajasuodatus
     let startFilter = req.query.alkaa
     let startFilterString = startFilter.toString()
-    console.log(startFilterString)
-    console.log(req.query.alkaa)
     let endFilter = req.query.loppuu
     let dateFiltersValid = req.query.ottosuodatus
     
@@ -272,16 +305,16 @@ app.get('/filteredDiary', (req, res) => {
 
     let whereClause = 'WHERE ' + conditions
     let cleanwhereClause = ''
-    console.log(whereClause.endsWith(' AND '))
+    
     if (whereClause.endsWith(' AND ')) {
         let position = whereClause.lastIndexOf(' AND ')
         cleanwhereClause = whereClause.substring(0, position)
-        console.log(position)
+        
     }
     else {
         cleanwhereClause = whereClause
     }
-   console.log('Where clause is:', cleanwhereClause)
+   
 })
 // TODO: Route to vehicle's diary page: all entries for individual vehicle by register number
 

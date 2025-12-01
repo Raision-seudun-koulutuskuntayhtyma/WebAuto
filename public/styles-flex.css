@@ -260,13 +260,18 @@ table {
 
 .raseko-button {
     font-size: larger;
+    text-decoration: none !important;
     color: var(--color-raseko-grey);
     background-color: var(--color-raseko-dark-blue);
     border-radius: 5px;
-    padding: 5px 10px;;
+    margin: 40px;
+    padding: 10px 30px;
 }
 
-
+.hilite-text {
+    font-weight: bold;
+    color: var(--color-raseko-pink);
+}
 
 .big-checkbox {
  width: 20px;
