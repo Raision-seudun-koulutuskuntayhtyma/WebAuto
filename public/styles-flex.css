@@ -1,0 +1,352 @@
+:root {
+    --icon-stroke-width: 1px;
+    --icon-stroke-color: black;
+    --icon-fill-color: none;
+    --icon-background-color: none;
+    --color-raseko-dark-blue: rgb(27, 51, 89);
+    --color-raseko-blue: rgb(0, 150, 179);
+    --color-raseko-light-blue: rgb(75, 188, 197);
+    --color-raseko-pink: rgb(232, 32, 112);
+    --color-raseko-grey: rgb(239, 239, 239);
+    --color-info-box-bg: #cfd1d5;
+    --shadow-raseko-dark-blue: rgba(27, 51, 89, 0.3);
+    --shadow-raseko-pink: rgb(232, 32, 112, 0.3);
+    --color-raseko-highlighter: rgba(75, 188, 197, 0.2);
+}
+/* Set size to follow parent's size */
+* {
+    box-sizing: border-box;
+}
+
+/* Basic styling for body and text elements */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+h1 {
+    color: #333;
+}
+p {
+    color: #262626;
+    line-height: 1.6;
+}
+
+
+/* Common settings for Containers*/
+.container {
+    width: 80%;
+    height: fit-content;
+    margin: auto;
+    overflow: auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    /* Adjust width for smaller screens */
+    @media (max-width: 600px) {
+        width: 100%;
+    }
+}
+.align-center {
+    text-align: center;
+}
+
+.alignment-box {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+
+/* Card layout for vehicle list */
+.card-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-ajossa {
+    float: left;
+    /* Set card width to 25% for 4 columns */
+    width: 25%;
+    margin: 1%;
+    border: 2px solid var(--color-raseko-pink);
+    border-radius: 20px;
+    box-shadow: 0 5px 8px var(--shadow-raseko-pink);
+    padding: 10px;
+
+    /* Adjust width for smaller screens */
+    @media (max-width: 600px) {
+        width: 100%;
+    }
+}
+
+.card-vapaana {
+    float: left;
+
+    /* Set card width to 25% for 4 columns */
+    width: 25%;
+    margin: 1%;
+    border: 2px solid var(--color-raseko-dark-blue);
+    border-radius: 20px;
+    box-shadow: 0 5px 8px var(--shadow-raseko-dark-blue);
+    padding: 10px;
+
+    /* Adjust width for smaller screens */
+    @media (max-width: 600px) {
+        width: 100%;
+    }
+}
+.vehicle-image {
+    /* Set image size relative to viewport width (4 columns)*/
+    width: 25vw;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+
+    /* Adjust width for smaller screens */
+    @media (max-width: 600px) {
+        width: 80vw;
+    }
+}
+
+.vehicle-detail-image {
+    /* Set image size relative to viewport width (4 columns)*/
+    max-width: 75vw;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+   
+}
+
+.card-text {
+    padding: 10px;
+    font-size: 14px;
+    background-color: #cfd1d5;
+    color: #151515;
+}
+
+.card-title {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Styling for dynamic buttons */
+.vapaana-btn {
+    display: block;
+    margin: 0 auto;
+    background-color: var(--color-raseko-dark-blue);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none !important;
+    font-size: 24px;
+}
+.ajossa-btn {
+    display: block;
+    margin: 0 auto;
+    background-color: var(--color-raseko-pink);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none !important;
+    font-size: 24px;
+}
+
+.icon-normal {
+    width: 1em;
+    height: 1em;
+}
+.icon-big{
+    width: 3em;
+    height: 3em;
+}
+
+.icon-medium{
+    width: 2em;
+    height: 2em;
+}
+
+.icon-huge{
+    width: 6em;
+    height: 6em;
+}
+
+.icon-enermous{
+    width: 8em;
+    height: 8em;
+}
+
+.icon-raseko-colors{
+    --icon-stroke-color:black;
+    --icon-fill-color: var(--color-raseko-pink);
+    --icon-background-color: var(--color-raseko-grey);
+}
+
+.icon-raseko-colors-dark{
+    --icon-stroke-color:var(--color-raseko-grey);
+    --icon-fill-color: var(--color-raseko-dark-blue);
+    --icon-background-color: var(--color-raseko-grey);
+}
+.icon-percentage-size{
+    width: 20%;
+}
+
+.info-box {
+    width: 100;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: stretch;
+    justify-content: space-around;
+    column-gap: 30px;
+    background-color: var(--color-info-box-bg);
+    margin: 20px 0;
+    padding: 10px 20px;
+}
+
+.drive-information {
+    border: none !important;
+    background-color: white;
+    border-spacing: 30px;
+}
+
+
+.big-text {
+    font-size: 3em;
+}
+th {
+    padding: 10px;
+    font-size: small;
+    color: var(--color-raseko-grey);
+    background-color: var(--color-raseko-dark-blue);
+    border: 1px solid var(--color-raseko-dark-blue);
+}
+
+td {
+    padding: 10px;
+    font-size: small;
+    color: var(--color-raseko-dark-blue);
+    
+    border: 1px solid var(--color-raseko-dark-blue);
+}
+tr:nth-child(even) {
+    background-color: var(--color-raseko-grey);
+}
+
+.tr-highlighted:hover {
+    background-color: var(--color-raseko-highlighter); 
+}
+
+table {
+    width: auto;
+    border-collapse: collapse;
+}
+
+.input-field {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    margin-bottom: 20px;
+}
+
+.raseko-button {
+    font-size: larger;
+    text-decoration: none !important;
+    color: var(--color-raseko-grey);
+    background-color: var(--color-raseko-dark-blue);
+    border-radius: 5px;
+    margin: 40px;
+    padding: 10px 30px;
+}
+
+.hilite-text {
+    font-weight: bold;
+    color: var(--color-raseko-pink);
+}
+
+.big-checkbox {
+ width: 20px;
+ height: 20px;
+}
+.menu-bar {
+    flex-grow: 1;
+    background-color: var(--color-raseko-dark-blue);
+    color: var(--color-raseko-grey);
+    font-size:30px;
+    padding-left: 20px
+}
+.menu-bar-item {
+    cursor: pointer !important;
+}
+/* The Overlay (background) */
+.overlay {
+  /* Height & width depends on how you want to reveal the overlay (see JS below) */   
+  height: 100%;
+  width: 0;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  background-color:var(--color-raseko-dark-blue); /* Raseko dark blue */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+}
+
+/* Position the content inside the overlay */
+.overlay-content {
+  position: relative;
+  top: 25%; /* 25% from the top */
+  width: 100%; /* 100% width */
+  text-align: center; /* Centered text/links */
+  margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+}
+
+/* The navigation links inside the overlay */
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: var(--color-raseko-grey);
+  display: block; /* Display block instead of inline */
+  transition: 0.3s; /* Transition effects on hover (color) */
+}
+
+/* When you mouse over the navigation links, change their color */
+.overlay a:hover, .overlay a:focus {
+  color: var(--color-raseko-light-blue);
+}
+
+/* Position the close button (top right corner) */
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+/* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}
+
+/* Responsive adjustments for small screens*/
+@media (max-width: 600px) {
+    .card {
+        flex: 100%;
+    } 
+}
+    

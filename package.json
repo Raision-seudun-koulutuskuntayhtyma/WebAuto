@@ -1,0 +1,38 @@
+{
+  "name": "webauto",
+  "version": "1.0.0",
+  "description": "Application for Raseko vehicle lending",
+  "keywords": [
+    "javascript",
+    "raseko"
+  ],
+  "homepage": "https://github.com/Raision-seudun-koulutuskuntayhtyma/WebAuto#readme",
+  "bugs": {
+    "url": "https://github.com/Raision-seudun-koulutuskuntayhtyma/WebAuto/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raision-seudun-koulutuskuntayhtyma/WebAuto.git"
+  },
+  "license": "ISC",
+  "author": "MikaV",
+  "type": "commonjs",
+  "main": "app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.3",
+    "express-session": "^1.18.2",
+    "pg": "^8.16.3",
+    "pg-pool": "^3.10.1"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}
