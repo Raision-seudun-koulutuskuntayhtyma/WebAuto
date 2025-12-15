@@ -270,6 +270,42 @@ app.get('/filteredDiary', (req, res) => {
     }
      
 })
+
+// Route to diary containing all vehicle data for tax administration
+app.get('/diaryTax', (req, res) => {
+    let user = req.session.user;
+    if (user) {
+        if (user.role == 'hallinto') {
+            pgtools.getTaxDiary().then((resultset) => {
+            // Lets give a key for the resultset and render it to the page
+            res.render('diaryTax', {diaryData: resultset.rows});
+        })
+        } else {
+            res.render('notAuthorized')
+        }
+    } else {
+        res.render('notSignedIn')
+    }
+    
+});
+
+// Route to sign out page
+app.get('/signOut', (req, res) =>{
+    req.session.destroy((err) => {
+        if (err) {
+            res.render('signOutError');
+        } else {
+           res.render('signOutSuccess');
+        }
+
+    })
+    
+})
+
+app.get('/api/meaningOfLife', (req, res) =>{
+    const something = {"explanation": "42"}
+    res.json(something)
+})
 // TODO: Route to vehicle's diary page: all entries for individual vehicle by register number
 
 // TODO: Route to vehicle's tracking page: location by register number
