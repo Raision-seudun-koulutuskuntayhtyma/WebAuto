@@ -302,28 +302,10 @@ app.get('/signOut', (req, res) =>{
     
 })
 
-// TODO: Muunna käyttämään oikeaa dataa fleet management sovelluksesta
-app.get('/api/vehiclePositionData', (req, res) =>{
-    console.log(req.query)
-    register = req.query.register
-
-    // Example data as JavaScipt object from external source
-    let data = {lat: 60.4786,
-                lon: 22.1636,
-                register: register
-    }
-
-    // Convert data to JSON
-    let jsonData = JSON.stringify(data)
-    
-    // Send JSON-data as response
-    res.json(jsonData)
-})
-
-// app.get('/api/vehiclePositionData', (req, res) =>{
-
+// // TODO: Muunna käyttämään oikeaa dataa fleet management sovelluksesta
+// app.get(' ', (req, res) =>{
+//     console.log(req.query)
 //     register = req.query.register
-//     console.log(register)
 
 //     // Example data as JavaScipt object from external source
 //     let data = {lat: 60.4786,
@@ -338,24 +320,31 @@ app.get('/api/vehiclePositionData', (req, res) =>{
 //     res.json(jsonData)
 // })
 
-// TODO: data API for track data by registernumber
-app.get('/api/vehicleTrackData', (req, res) =>{
+app.get('/api/vehiclePositionData', (req, res) =>{
 
     register = req.query.register
+    console.log(register)
 
-    // Read or create GeoJSON-objeckt to present a polyline as vehicle's track
+    // Example data as JavaScipt object from external source
+    let data = {lat: 60.4786,
+                lon: 22.1636,
+                register: register
+    }
+
+    // Convert data to JSON
+    let jsonData = JSON.stringify(data)
     
     // Send JSON-data as response
     res.json(jsonData)
 })
+
+
 // TODO: Route to vehicle's tracking page: location by register number
 app.get('/vehiclePosition', (req, res) => {
     let vehicleData = {register: req.query.register}
     res.render('vehiclePosition', vehicleData)
 })
 
-// TODO: Route to vehicle's tracking page: track by register number
-app.get('/vehicleTrack')
 
 // SERVER START
 // ------------
